@@ -1,10 +1,10 @@
 import pandas as pd
 
-red1 = pd.read_csv('winequality-red-1.csv', sep=';')
-red2 = pd.read_csv('winequality-red-2.csv', sep=';')
+red1 = pd.read_csv('winequality-red-1.csv', sep=';', decimal = ',')
+red2 = pd.read_csv('winequality-red-2.csv', sep=';', decimal = ',')
 
-white1 = pd.read_csv('winequality-white-1.csv', sep=';')
-white2 = pd.read_csv('winequality-white-2.csv', sep=';')
+white1 = pd.read_csv('winequality-white-1.csv', sep=';', decimal = ',')
+white2 = pd.read_csv('winequality-white-2.csv', sep=';', decimal = ',')
 
 red1 = red1.drop(['ID'], axis=1)
 red2 = red2.drop(['ID'], axis=1)
