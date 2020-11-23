@@ -21,4 +21,5 @@ print("Rotwein\n", redall)
 print("Alle Weine\n", wineall)
 print("Feature Datentypen\n", wineall.dtypes)
 
+wineall = wineall.drop(['ID'], axis=1)
 wineall.to_csv('data/wineall.csv')
