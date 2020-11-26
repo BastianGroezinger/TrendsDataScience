@@ -33,12 +33,18 @@ imp = IterativeImputer(max_iter = 10, sample_posterior = False)
 #create new np.array without missing values
 wine = np.round(imp.fit_transform(wineall,1),2)
 
+#outlier Handling
+
 #Initialize MaxAbsScaler()
 scaler = preprocessing.MaxAbsScaler()
 #fit wine np.array to MaxAbsScaler
 scaler.fit(wine)
 #Transform wine np.array to scaled data
 wine = scaler.transform(wine)
+
+#feature select
+
+#dimensional reduction
 
 #transform np.array to Dataframe
 wineall = pd.DataFrame({'ID': wine[:,0], 'fixed acidity': wine[:,1], 'volatile acidity': wine[:,2], 'citric acid': wine[:,3], 'residual sugar': wine[:,4], 'chlorides': wine[:,5], 'flavanoids': wine[:,6], 'free sulfur dioxide': wine[:,7],'total sulfur dioxide': wine[:,8], 'density': wine[:,9], 'pH': wine[:,10], 'sulphates': wine[:,11],'magnesium': wine[:,12], 'alcohol': wine[:,13], 'lightness': wine[:,14], 'quality': wine[:,15]})
