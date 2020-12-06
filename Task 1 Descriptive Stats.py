@@ -43,9 +43,6 @@ print('-------------------------------------------------------------------------
 print('Total count MV\n', wineall.isnull().sum().sum())
 print('---------------------------------------------------------------------------------------------------')
 
-#print('Leere Zellen\n', wineall['fixed acidity'].isnull())
-print('---------------------------------------------------------------------------------------------------')
-
 # Output of different data
 print("Alle Weine\n", wineall)
 print('---------------------------------------------------------------------------------------------------')
@@ -71,24 +68,41 @@ print('-------------------------------------------------------------------------
 
 print('Indices of MV e.g. pH \n', wineall[wineall['pH'].isnull()].index.tolist())
 
+print('----------------------------------------------------------------------------------------------------')
+
+#print('Zeros (0)?', wineall.where().values.any())
+
+print('----------------------------------------------------------------------------------------------------')
+
+print('----------------------------------------------------------------------------------------------------')
+
+print('Features with Zero(0) values \n', wineall.where(wineall == 0).count())
+
+print('----------------------------------------------------------------------------------------------------')
+
+print('Indices of 0 e.g. citric acid \n', wineall[wineall['citric acid'] == 0].index.tolist())
+print('--------------------------------------------------------------------------------------------')
+print('Indices of 0 e.g. magnesium \n', wineall[wineall['magnesium'] == 0].index.tolist())
+
+print('--------------------------------------------------------------------------------------------')
 #visual analytics - correlation Matrix between features
 #corrMatrixAll = wineall.corr()
 #corrMatrixWhite =  whiteall.corr()
-corrMatrixRed = redall.corr()
+#corrMatrixRed = redall.corr()
 
 #scatter_matrix(corrMatrix, figsize=(16,12), alpha=0.3)
 #sn.heatmap(corrMatrixAll, annot=True, cmap="coolwarm")
 #sn.heatmap(corrMatrixWhite, annot=True, cmap="coolwarm")
-sn.heatmap(corrMatrixRed, annot=True, cmap="coolwarm")
+#sn.heatmap(corrMatrixRed, annot=True, cmap="coolwarm")
 
 #style
 #corrMatrixAll.style.background_gradient(axis= None)
 #corrMatrixWhite.style.background_gradient(axis= None)
-corrMatrixRed.style.background_gradient(axis= None)
+#corrMatrixRed.style.background_gradient(axis= None)
 
 #plt.show()
 #plt.show()
-plt.show()
+#plt.show()
 
 #scatterplot
 
