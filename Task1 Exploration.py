@@ -4,6 +4,9 @@ from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 import numpy as np
 from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
+from sklearn import datasets
+from sklearn import svm
 
 # reading in redwine data
 red1 = pd.read_csv('data/winequality-red-1.csv', sep=';', decimal =',')
@@ -33,7 +36,6 @@ imp = IterativeImputer(max_iter = 10, sample_posterior = False)
 #create new np.array without missing values
 wine = np.round(imp.fit_transform(wineall,1),2)
 
-#outlier Handling
 
 #Initialize MaxAbsScaler()
 scaler = preprocessing.MaxAbsScaler()
@@ -42,16 +44,15 @@ scaler.fit(wine)
 #Transform wine np.array to scaled data
 wine = scaler.transform(wine)
 
-#feature select
+x = wine[:,[1,2,3,4,5,6,7,8,9,10,11,12,13,14]]
+y = wine[:,15]
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.4, random_state=0)
+print("Training data: ",x_train.shape, y_train.shape)
+print("Test data: ",x_test.shape, y_test.shape)
 
-#dimensional reduction
+#Fit SVM classifier to training data
+clf = svm.SVR(kernel='linear', C=1).fit(x_train, y_train)
+#Calculate accuracies
+print("Training data accuracy: ",round(clf.score(x_train, y_train),3))
+print("Test data accuracy: ",round(clf.score(x_test, y_test),3))
 
-#transform np.array to Dataframe
-wineall = pd.DataFrame({'ID': wine[:,0], 'fixed acidity': wine[:,1], 'volatile acidity': wine[:,2], 'citric acid': wine[:,3], 'residual sugar': wine[:,4], 'chlorides': wine[:,5], 'flavanoids': wine[:,6], 'free sulfur dioxide': wine[:,7],'total sulfur dioxide': wine[:,8], 'density': wine[:,9], 'pH': wine[:,10], 'sulphates': wine[:,11],'magnesium': wine[:,12], 'alcohol': wine[:,13], 'lightness': wine[:,14], 'quality': wine[:,15]})
-
-# Output of different data
-print("Alle Weine\n", wineall)
-print("Feature Datentypen\n", wineall.dtypes)
-
-wineall = wineall.drop(['ID'], axis=1)
-wineall.to_csv('data/wineall.csv')
